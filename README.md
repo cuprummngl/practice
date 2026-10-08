@@ -100,19 +100,7 @@
 
 ### 5.1. Развёртывание
 
-```mermaid
-flowchart LR
-    U[Пользователь] --> L[Windows: Milestone Launcher]
-    U --> W[Браузер]
-    L -->|HTTPS| B[Gml.Backend и адаптер авторизации]
-    B -->|HTTPS и межсервисный секрет| A[PHP API аккаунтов]
-    W -->|HTTPS| S[Сайт и личный кабинет]
-    S --> D[(SQLite: аккаунты)]
-    A --> D
-    B --> T[(Хранилище серверных сессий)]
-    L --> K[Windows DPAPI: локальный токен]
-    S -->|Защищённый SMTP| M[Почтовый сервис]
-```
+![MD1](https://github.com/cuprummngl/practice/blob/main/md1.png)
 
 Backend является единственной точкой входа для API лаунчера. Сайт является источником сведений об аккаунте и его статусе. Серверная сессия принадлежит backend. Ни лаунчер, ни браузер не получают доступ к БД или межсервисному секрету.
 
@@ -132,30 +120,7 @@ Backend является единственной точкой входа для
 
 ### 5.3. Последовательность входа
 
-```mermaid
-sequenceDiagram
-    actor U as Пользователь
-    participant L as Лаунчер
-    participant B as Backend
-    participant A as API аккаунтов
-    participant D as БД аккаунтов
-    U->>L: Логин и пароль
-    L->>B: POST signin
-    B->>A: POST authenticate
-    A->>D: Проверить пароль и условия допуска
-    D-->>A: Аккаунт и статусы
-    alt Доступ разрешён
-        A-->>B: UUID, имя, модель, версия доступа
-        B->>B: Создать сессию
-        B-->>L: Токен и срок действия
-        L->>L: Защитить и сохранить токен
-        L-->>U: Основной экран
-    else Отказ
-        A-->>B: HTTP-код и код ошибки
-        B-->>L: Нормализованная ошибка
-        L-->>U: Понятное сообщение
-    end
-```
+![MD2]([https://github.com/cuprummngl/practice/blob/main/md1.png](https://github.com/cuprummngl/practice/blob/main/md2.png))
 
 ## 6. Модель данных и управление сессиями
 
