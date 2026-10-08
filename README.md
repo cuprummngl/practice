@@ -120,7 +120,7 @@ Backend является единственной точкой входа для
 
 ### 5.3. Последовательность входа
 
-![MD2]([https://github.com/cuprummngl/practice/blob/main/md1.png](https://github.com/cuprummngl/practice/blob/main/md2.png))
+![MD2](https://github.com/cuprummngl/practice/blob/main/md2.png)
 
 ## 6. Модель данных и управление сессиями
 
